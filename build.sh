@@ -19,18 +19,20 @@ echo\
 START=`date +%s`
 BUILD_DATE="$(date +%Y%m%d)"
 WITHOUT_CHECK_API=true
-BL=$PWD/treble_build_pe
+BL=$PWD/treble_fluent
 BD=$HOME/builds
+
+FLUENT_BUILD_CODENAME := samurai
 
 if [ ! -d .repo ]
 then
-    echo "Initializing PE workspace"
-    repo init -u https://github.com/PixelExperience/manifest -b twelve
+    echo "Initializing FluentOS workspace"
+    repo init -u https://github.com/FluentOS-Project/manifest -b samurai
     echo ""
 
     echo "Preparing local manifest"
     mkdir -p .repo/local_manifests
-    cp $BL/manifest.xml .repo/local_manifests/pixel.xml
+    cp $BL/manifest.xml .repo/local_manifests/fluent.xml
     echo ""
 fi
 
@@ -50,7 +52,7 @@ echo ""
 echo "Applying PHH patches"
 cd device/phh/treble
 cp $BL/pe.mk .
-bash generate.sh pe
+bash generate.sh fluent
 cd ../../..
 bash $BL/apply-patches.sh $BL phh
 echo ""
@@ -101,13 +103,13 @@ buildSasImages() {
 
 generatePackages() {
     BASE_IMAGE=$BD/system-treble_a64_bvN.img
-    xz -cv $BASE_IMAGE -T0 > $BD/PixelExperience_arm32_binder64-ab-12.0-$BUILD_DATE-UNOFFICIAL.img.xz
-    xz -cv ${BASE_IMAGE%.img}-vndklite.img -T0 > $BD/PixelExperience_arm32_binder64-ab-vndklite-12.0-$BUILD_DATE-UNOFFICIAL.img.xz
-    xz -cv ${BASE_IMAGE%.img}-slim.img -T0 > $BD/PixelExperience_arm32_binder64-ab-slim-12.0-$BUILD_DATE-UNOFFICIAL.img.xz
+    xz -cv $BASE_IMAGE -T0 > $BD/FluentOS-$FLUENT_BUILD_CODENAME-12.0_arm32_binder64-ab-12.0-$BUILD_DATE-OFFICIAL.img.xz
+    xz -cv ${BASE_IMAGE%.img}-vndklite.img -T0 > $BD/FluentOS-$FLUENT_BUILD_CODENAME-12.0_arm32_binder64-ab-vndklite-12.0-$BUILD_DATE-OFFICIAL.img.xz
+    xz -cv ${BASE_IMAGE%.img}-slim.img -T0 > $BD/FluentOS-$FLUENT_BUILD_CODENAME-12.0_arm32_binder64-ab-slim-12.0-$BUILD_DATE-OFFICIAL.img.xz
     BASE_IMAGE=$BD/system-treble_arm64_bvN.img
-    xz -cv $BASE_IMAGE -T0 > $BD/PixelExperience_arm64-ab-12.0-$BUILD_DATE-UNOFFICIAL.img.xz
-    xz -cv ${BASE_IMAGE%.img}-vndklite.img -T0 > $BD/PixelExperience_arm64-ab-vndklite-12.0-$BUILD_DATE-UNOFFICIAL.img.xz
-    xz -cv ${BASE_IMAGE%.img}-slim.img -T0 > $BD/PixelExperience_arm64-ab-slim-12.0-$BUILD_DATE-UNOFFICIAL.img.xz
+    xz -cv $BASE_IMAGE -T0 > $BD/FluentOS-$FLUENT_BUILD_CODENAME-12.0_arm64-ab-12.0-$BUILD_DATE-OFFICIAL.img.xz
+    xz -cv ${BASE_IMAGE%.img}-vndklite.img -T0 > $BD/FluentOS-$FLUENT_BUILD_CODENAME-12.0_arm64-ab-vndklite-12.0-$BUILD_DATE-OFFICIAL.img.xz
+    xz -cv ${BASE_IMAGE%.img}-slim.img -T0 > $BD/FluentOS-$FLUENT_BUILD_CODENAME-12.0_arm64-ab-slim-12.0-$BUILD_DATE-OFFICIAL.img.xz
     rm -rf $BD/system-*.img
 }
 
