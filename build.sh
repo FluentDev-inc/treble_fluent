@@ -1,6 +1,6 @@
 #!/bin/bash
 echo ""
-echo "Pixel Experience 12 Treble Buildbot"
+echo "FluentOS Codename: Samurai Treble Buildbot"
 echo "ATTENTION: this script syncs repo on each run"
 echo "Executing in 5 seconds - CTRL-C to exit"
 echo ""
@@ -22,7 +22,7 @@ WITHOUT_CHECK_API=true
 BL=$PWD/treble_fluent
 BD=$HOME/builds
 
-FLUENT_BUILD_CODENAME := samurai
+export FLUENT_BUILD_CODENAME=samurai
 
 if [ ! -d .repo ]
 then
