@@ -51,7 +51,7 @@ echo ""
 
 echo "Applying PHH patches"
 cd device/phh/treble
-cp $BL/pe.mk .
+cp $BL/fluent.mk .
 bash generate.sh fluent
 cd ../../..
 bash $BL/apply-patches.sh $BL phh
