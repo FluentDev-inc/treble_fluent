@@ -27,7 +27,7 @@ export FLUENT_BUILD_CODENAME=samurai
 if [ ! -d .repo ]
 then
     echo "Initializing FluentOS workspace"
-    repo init -u https://github.com/FluentOS-Project/manifest -b samurai
+    repo init -u https://github.com/FluentOS-Project/manifest -b samurai-gsi
     echo ""
 
     echo "Preparing local manifest"
